@@ -1,0 +1,15 @@
+using NodeCanvas.Framework;
+using ParadoxNotion.Design;
+
+#ROOTNAMESPACEBEGIN#
+    [Category("Infinity/New Action Task")]
+    [Description("Please describe what this ActionTask does.")]
+    public class #SCRIPTNAME# : ActionTask {
+
+        //[RequiredField] public BBParameter<bool> bbParameter;
+
+        protected override void OnExecute() {
+            EndAction(trye);
+        }
+    }
+#ROOTNAMESPACEEND#

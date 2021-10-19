@@ -1,0 +1,13 @@
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+    /// <summary>
+    /// Note to developers: Please describe what this class does.
+    /// </summary>
+    public class #SCRIPTNAME# {
+
+        public #SCRIPTNAME# () {
+
+        }
+    }
+#ROOTNAMESPACEEND#

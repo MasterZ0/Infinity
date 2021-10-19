@@ -1,0 +1,15 @@
+using NodeCanvas.Framework;
+using ParadoxNotion.Design;
+
+#ROOTNAMESPACEBEGIN#
+    [Category("Infinity/New Condition Task")]
+    [Description("Please describe what this ConditionTask does.")]
+    public class #SCRIPTNAME# : ConditionTask {
+
+        //[RequiredField] public BBParameter<bool> bbParameter;
+
+        protected override bool OnCheck() {
+            return true;
+        }
+    }
+#ROOTNAMESPACEEND#

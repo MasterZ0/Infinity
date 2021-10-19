@@ -1,0 +1,16 @@
+{
+    "name": "Infinity.ApplicationManager",
+    "rootNamespace": "Infinity.ApplicationManager",
+    "references": [
+        "GUID:bd802335ae5c75d4fbb8c34f5c8c6ff9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

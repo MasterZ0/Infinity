@@ -1,0 +1,14 @@
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+
+    /// <summary>
+    /// Note to developers: Please describe what this class does.
+    /// </summary>
+    [CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "Scriptable Objects/#SCRIPTNAME#")]
+    public class #SCRIPTNAME# : ScriptableObject {
+        [Title("#SCRIPTNAME#")]
+        public GameObject rememberToUseTheTitle;
+    }
+#ROOTNAMESPACEEND#
