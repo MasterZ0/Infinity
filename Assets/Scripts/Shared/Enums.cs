@@ -5,4 +5,11 @@ namespace Infinity.Shared
         MainMenu,
         Gameplay
     }
+
+    public enum PieceType {
+        Circle,
+        Square,
+        HexagonFlat,
+        HexagonPointed,
+    }
 }

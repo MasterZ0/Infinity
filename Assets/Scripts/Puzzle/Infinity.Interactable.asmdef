@@ -1,10 +1,9 @@
 {
-    "name": "Infinity.Player",
-    "rootNamespace": "Infinity.Player",
+    "name": "Infinity.Interactable",
+    "rootNamespace": "Infinity.Interactable",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:2e58e14cf3f8ea848b6affa5f1b9b106",
-        "GUID:af79f6bd17c2c734c90f287a277ea264"
+        "GUID:9ac52a52562e38c48a7c5ca41116fd45",
+        "GUID:bd802335ae5c75d4fbb8c34f5c8c6ff9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

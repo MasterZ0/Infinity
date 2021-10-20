@@ -139,6 +139,7 @@ namespace Infinity.Editor {
                 asset = CreateInstance<T>();
             }
 
+            [InfoBox("About Color:\n\n<color=grey>Black:</color> Empty\n<color=yellow>Yellow:</color> Light\n<color=cyan>Cyan:</color> Energy\n<color=lime>Green:</color> Circle\n<color=magenta>Magenta</color> Square\n<color=orange>Orange:</color> Hexagon Flat\n<color=#FF4040>Red:</color> Hexagon Pointed")]
             [Space]
             [InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Hidden)]
             [SerializeField] private T asset;
