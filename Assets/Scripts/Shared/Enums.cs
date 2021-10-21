@@ -6,10 +6,28 @@ namespace Infinity.Shared
         Gameplay
     }
 
+    public enum PuzzleType {
+        Lamp,
+        Power,
+        Circle,
+        Square,
+        HorizontalHexagon,
+        VerticalHexagon,
+        Empty,
+    }
+
     public enum PieceType {
         Circle,
         Square,
-        HexagonFlat,
-        HexagonPointed,
+        HorizontalHexagon,
+        VerticalHexagon,
+    }
+
+    [System.Flags]
+    public enum LineDirection {
+        Up = 1,
+        Down = 2,
+        Left = 4,
+        Right = 8,
     }
 }

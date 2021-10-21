@@ -1,0 +1,21 @@
+{
+    "name": "Infinity.MainMenu",
+    "rootNamespace": "Infinity.MainMenu",
+    "references": [
+        "GUID:9ac52a52562e38c48a7c5ca41116fd45",
+        "GUID:bd802335ae5c75d4fbb8c34f5c8c6ff9",
+        "GUID:30bced351394fd547bbfb196ef16caf2",
+        "GUID:205e8d463fadd1c44ad61d6dcaeb6604",
+        "GUID:af79f6bd17c2c734c90f287a277ea264",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

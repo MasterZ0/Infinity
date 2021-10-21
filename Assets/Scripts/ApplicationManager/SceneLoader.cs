@@ -12,7 +12,7 @@ namespace Infinity.ApplicationManager {
     public class SceneLoader : MonoBehaviour {
 
         private GameScene currentScene;
-
+        private bool loading;
         /// <summary>
         /// Check if there is any scene loaded, if is not, load the MainMenu
         /// </summary>
@@ -23,6 +23,7 @@ namespace Infinity.ApplicationManager {
             if (activeScene == SceneManager.GetSceneByBuildIndex(0) && SceneManager.sceneCount == 1) {
 
                 currentScene = GameScene.MainMenu;
+                loading = true;
                 StartCoroutine(LoadCurrentScene(onFinish));
                 return;
             }
@@ -31,24 +32,29 @@ namespace Infinity.ApplicationManager {
         }
 
         public void LoadScene(GameScene gameScene, Action onFinish) {
+            if (loading) {
+                return;
+            }
+            loading = true;
             StartCoroutine(LoadNextScene(gameScene, onFinish));
         }
 
         #region Private Methods
         private IEnumerator LoadCurrentScene(Action onFinish) {
 
-            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync((int)currentScene, LoadSceneMode.Additive);
+            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(currentScene.ToString(), LoadSceneMode.Additive);
             yield return new WaitUntil(() => loadSceneAsync.isDone);
 
-            Scene loadedScene = SceneManager.GetSceneByBuildIndex((int)currentScene);
+            Scene loadedScene = SceneManager.GetSceneByName(currentScene.ToString());
             SceneManager.SetActiveScene(loadedScene);
 
+            loading = false;
             onFinish();
         }
         private IEnumerator LoadNextScene(GameScene gameScene, Action onFinish) {
 
             // Unload current
-            AsyncOperation loadSceneAsync = SceneManager.UnloadSceneAsync((int)currentScene);
+            AsyncOperation loadSceneAsync = SceneManager.UnloadSceneAsync(currentScene.ToString());
             yield return new WaitUntil(() => loadSceneAsync.isDone);
 
             currentScene = gameScene;

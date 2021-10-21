@@ -94,5 +94,9 @@ namespace Infinity.System
                     pool.AddToPool(instance);
             }
         }
+
+        private void OnDestroy() {
+            pools.Clear();
+        }
     }
 }

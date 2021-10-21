@@ -1,38 +1,30 @@
 using Infinity.Data;
 using Infinity.Shared;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Infinity.Interactable
-{
+namespace Infinity.Puzzle {
 
     /// <summary>
     /// Note to developers: Please describe what this MonoBehaviour does.
     /// </summary>
-    public class PlaceHolder : MonoBehaviour, ISlot {
-
-        [Title("Piece")]
-        [SerializeField] private bool initialSlot;
-        [SerializeField] private PieceType slotPieceType;
+    public class PlaceHolder : Interactable, ISlot {
 
         #region Properties
-        public bool InitialSlot => initialSlot;
         public Vector2 Position => transform.position;
-        public float MinimumDropDistance => GameValuesSO.GameSettings.MinimumDropDistance;
+        public float MinimumDropDistance => GameValuesSO.PuzzleSettings.MinimumDropDistance;
         #endregion
 
         private bool filled;
         public bool Drop(Vector2 itemPosition, PieceType pieceType) {
 
-            // Check item
-            if (pieceType != slotPieceType) {
+            // Check type
+            if (pieceType.ToString() != puzzleType.ToString() && puzzleType != PuzzleType.Empty) {
                 return false;
             }
 
-            // Check distance
-            if (Vector2.Distance(Position, itemPosition) > MinimumDropDistance) {
+            // Is filled or is over the minimum distance
+            if (filled && Vector2.Distance(Position, itemPosition) > MinimumDropDistance) {
                 return false;
             }
 

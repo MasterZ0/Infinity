@@ -6,7 +6,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Infinity.Editor {
+namespace Infinity.UnityEditor {
 
     /// <summary>
     /// Create the Game Design screen
@@ -52,9 +52,11 @@ namespace Infinity.Editor {
         }
 
         private void DrawTree(OdinMenuTree tree) {
-            newStage = new CreateNewAsset<StageSO>();
-            tree.Add($"{ApplicationName} Settings/Main", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
 
+            tree.Add($"{ApplicationName} Settings/Main", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
+            tree.Add($"{ApplicationName} Settings/Puzzle", GameValuesSO.PuzzleSettings, EditorIcons.Next);
+
+            newStage = new CreateNewAsset<StageSO>();
 
             tree.Add("Stages", newStage, EditorIcons.GridBlocks);
             tree.AddAllAssetsAtPath("Stages", ProjectPath.Stages, typeof(StageSO));
@@ -139,7 +141,6 @@ namespace Infinity.Editor {
                 asset = CreateInstance<T>();
             }
 
-            [InfoBox("About Color:\n\n<color=grey>Black:</color> Empty\n<color=yellow>Yellow:</color> Light\n<color=cyan>Cyan:</color> Energy\n<color=lime>Green:</color> Circle\n<color=magenta>Magenta</color> Square\n<color=orange>Orange:</color> Hexagon Flat\n<color=#FF4040>Red:</color> Hexagon Pointed")]
             [Space]
             [InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Hidden)]
             [SerializeField] private T asset;

@@ -11,6 +11,9 @@ namespace Infinity.Shared
         // Transitions
         public const string FadeIn = "FadeIn";
         public const string FadeOut = "FadeOut";
+
+        public const string Energized = "Energized";
+        public const string Moving = "Moving";
     }
 
     public static class AudioMixers {

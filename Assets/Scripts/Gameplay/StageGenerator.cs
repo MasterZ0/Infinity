@@ -1,86 +1,79 @@
 using Infinity.Data;
+using Infinity.Puzzle;
 using Infinity.Shared;
 using Infinity.System;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Infinity.Gameplay
 {
 
     /// <summary>
-    /// Note to developers: Please describe what this MonoBehaviour does.
+    /// Generate the slots and pieces
     /// </summary>
     public class StageGenerator : MonoBehaviour {
 
-        [Title("Initial Pieces")]
-        [SerializeField] private Transform circle;
-        [SerializeField] private Transform square;
-        [SerializeField] private Transform hexagonFlat;
-        [SerializeField] private Transform hexagonPointed;
+        [Title("Stage Generator")]
+        [SerializeField] private SpriteRenderer background;
 
-        [Title("Stage Slots")]
-        [SerializeField] private Transform lamp;
-        [SerializeField] private Transform energy;
-        [SerializeField] private Transform circleSlot;
-        [SerializeField] private Transform squareSlot;
-        [SerializeField] private Transform hexagonFlatSlot;
-        [SerializeField] private Transform hexagonPointedSlot;
+        [Title("Slots")]
+        [SerializeField] private Interactable emptySlot;
+        [SerializeField] private List<Interactable> interactables;
+
+        [Title("Pieces")]
+        [SerializeField] private List<Piece> pieces;
 
         public int X => StageSO.GridX;
         public int Y => StageSO.GridY;
 
-        private Dictionary<PieceType, Transform> pieces;
-        private void Awake() {
-            pieces = new Dictionary<PieceType, Transform>() {
-                [PieceType.Circle] = circleSlot,
-                [PieceType.Square] = square,
-                [PieceType.HexagonFlat] = hexagonFlat,
-                [PieceType.HexagonPointed] = hexagonPointed,
-            };
-        }
+        public Vector2 start;
+        public Vector2 spacement;
+        public float max;
         public void GenerateStage(StageSO stageSO) {
+            ObjectPool.ReturnAllToPool();
+            background.sprite = stageSO.Background;
 
-
+            // Spawn Place Holders
             for (int x = 0; x < X; x++) {
                 for (int y = 0; y < Y; y++) {
-                    SpawnSlot(new Vector2(X - x, Y - y), stageSO.ItemsGrid[x, y]);
+
+                    SpawnPlaceHolder(new Vector2(x, Y - y), stageSO.ItemsGrid[x, y]);
                 }
             }
 
-            Vector2 piecePosition = Vector2.zero;
-            foreach (PieceType pieceType in stageSO.InitialPieces) {
-                piecePosition.x += 1;
-                ObjectPool.SpawnPoolObject(pieces[pieceType], piecePosition);
+            // Spawn possible items
+            Vector2 piecePosition = start;
+            foreach (PieceData pieceData in stageSO.InitialPieces) {
+
+                SpawnPiece(piecePosition, pieceData.PieceType, pieceData.LineDirection);
+                piecePosition.x += spacement.x;
+                if (piecePosition.x > max) {
+                    piecePosition.x = start.x;
+                    piecePosition.y -= spacement.y;
+                }
+            }
+        }
+        
+        private void SpawnPlaceHolder(Vector2 position, int index) {
+            if (index == 0)
+                return;
+
+            PuzzleType slotType = (PuzzleType)index - 1;
+            Interactable prefab = interactables.Where(p => p.PuzzleType == slotType).First();
+            ObjectPool.SpawnPoolObject(prefab, position);
+
+            if (prefab is Lamp) {
+                PuzzleController.AddLamp(prefab as Lamp);
             }
         }
 
-        private void SpawnSlot(Vector2 position, int type) {
-            switch (type) {
-                case 0:
-                    return;
-                case 1:
-                    ObjectPool.SpawnPoolObject(lamp, position);
-                    return;
-                case 2:
-                    ObjectPool.SpawnPoolObject(energy, position);
-                    return;
-                case 3:
-                    ObjectPool.SpawnPoolObject(circleSlot, position);
-                    return;
-                case 4:
-                    ObjectPool.SpawnPoolObject(squareSlot, position);
-                    return;
-                case 5:
-                    ObjectPool.SpawnPoolObject(hexagonFlatSlot, position);
-                    return;
-                case 6:
-                    ObjectPool.SpawnPoolObject(hexagonPointed, position);
-                    return;
-                default:
-                    throw new NotImplementedException();
-            }
+        private void SpawnPiece(Vector2 piecePosition, PieceType pieceType, LineDirection lineDirection) {
+            Interactable placeHolder = ObjectPool.SpawnPoolObject(emptySlot, piecePosition);
+
+            Piece prefab = pieces.Where(p => p.PieceType == pieceType).First();
+            ObjectPool.SpawnPoolObject(prefab, piecePosition).Init(placeHolder, lineDirection);
         }
 
         private void OnDrawGizmosSelected() {
@@ -89,5 +82,16 @@ namespace Infinity.Gameplay
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(center, size);
         }
+
+        #region Dev Tool
+        [Title("Dev Tool")]
+        [SerializeField] private int stageIndex;
+
+        [Button]
+        private void TestSpawn() {
+            GenerateStage(GameValuesSO.GameSettings.Stages[stageIndex]);
+        }
+
+        #endregion
     }
 }

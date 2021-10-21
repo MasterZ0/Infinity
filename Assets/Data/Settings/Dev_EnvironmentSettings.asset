@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Dev_EnvironmentSettings
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 440fa0e68474abb46999b24ae5012beb, type: 2}
+  puzzleSettings: {fileID: 11400000, guid: 7ab4f3a4662eba2439ca296a4674e0a6, type: 2}

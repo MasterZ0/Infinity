@@ -1,4 +1,4 @@
-using Infinity.Interactable;
+using Infinity.Puzzle;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

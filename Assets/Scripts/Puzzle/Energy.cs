@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Infinity.Interactable
+namespace Infinity.Puzzle
 {
 
     /// <summary>

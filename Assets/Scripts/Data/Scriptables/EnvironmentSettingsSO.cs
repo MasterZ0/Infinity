@@ -9,7 +9,9 @@ namespace Infinity.Data {
     public class EnvironmentSettingsSO : ScriptableObject {
 
         public GameSettingsSO GameSettings => gameSettings;
+        public PuzzleSettingsSO PuzzleSettings => puzzleSettings;
 
         [SerializeField] private GameSettingsSO gameSettings;
+        [SerializeField] private PuzzleSettingsSO puzzleSettings;
     }
 }

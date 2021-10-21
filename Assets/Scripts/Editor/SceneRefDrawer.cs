@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using Infinity.Shared;
 
-namespace Infinity.Editor {
+namespace Infinity.UnityEditor {
 
     [CustomPropertyDrawer(typeof(SceneRef))]
     public class SceneRefDrawer : PropertyDrawer {

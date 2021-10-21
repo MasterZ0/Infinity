@@ -12,19 +12,32 @@ namespace Infinity.Data {
     [CreateAssetMenu(fileName = "Stage", menuName = "Scriptable Objects/Stage")]
     public class StageSO : SerializedScriptableObject {
 
-        public List<PieceType> InitialPieces => initialPieces;
+        #region Public data
+        public Sprite Background => Backgrounds[background];
+        public List<PieceData> InitialPieces => initialPieces;
         public int[,] ItemsGrid => itemsGrid;
-
-        [Title("Stage Settings")]
-        [SerializeField] private List<PieceType> initialPieces;
-
-        [TableMatrix(HorizontalTitle = "Stage slots", DrawElementMethod = "DrawColoredEnumElement", RowHeight = 32, RespectIndentLevel = true)]
-        [SerializeField] private int[,] itemsGrid = new int[GridX, GridY];
 
         public const int GridX = 8;
         public const int GridY = 16;
+        #endregion
 
-        #if UNITY_EDITOR
+        #region Serialized data
+        [Title("Stage Settings")]
+        [DropdownData(nameof(Backgrounds))]
+        [SerializeField] private int background;
+
+        [TableList]
+        [SerializeField] private List<PieceData> initialPieces;
+
+        [InfoBox("About Color:\n\n<color=grey>Black:</color> Empty\n<color=yellow>Yellow:</color> Light\n<color=cyan>Cyan:</color> Power\n<color=orange>Orange:</color> Circle\n<color=magenta>Magenta</color> Square\n<color=lime>Green:</color> Horizontal Hexagon\n<color=#FF4040>Red:</color> Vertical Hexagon")]
+        [TableMatrix(HorizontalTitle = "Stage slots", DrawElementMethod = "DrawColoredEnumElement", RowHeight = 32, RespectIndentLevel = true)]
+        [SerializeField] private int[,] itemsGrid = new int[GridX, GridY];
+
+        private static List<Background> Backgrounds => GameValuesSO.GameSettings.Backgrounds;
+        #endregion
+
+        #region Drawer methods
+#if UNITY_EDITOR
         private static int DrawColoredEnumElement(Rect rect, int value) {
             if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition)) {
                 value++;
@@ -44,13 +57,14 @@ namespace Infinity.Data {
                 0 => Color.black,
                 1 => Color.yellow,
                 2 => Color.cyan,
-                3 => Color.green,
+                3 => new Color(1f, 0.5f, 0f),
                 4 => Color.magenta,
-                5 => new Color(1f, 0.5f, 0f),
+                5 => Color.green,
                 6 => Color.red,
                 _ => Color.white,
             };
         }
-        #endif
+#endif
+        #endregion
     }
 }

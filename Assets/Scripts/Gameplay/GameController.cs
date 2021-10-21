@@ -1,4 +1,6 @@
+using Infinity.ApplicationManager;
 using Infinity.Data;
+using Infinity.Shared;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,10 +19,22 @@ namespace Infinity.Gameplay
 
         public static Camera MainCamera { get; private set; }
 
-        private StageSO currentStage;
-        private void Awake() {
+        private static StageSO currentStage;
+        private void Start() {
             MainCamera = mainCamera;
-            stageGenerator.GenerateStage(GameValuesSO.GameSettings.Stages[0]);
+
+            if (!currentStage) {
+                currentStage = GameValuesSO.GameSettings.Stages[0];
+            }
+            stageGenerator.GenerateStage(currentStage);
+        }
+
+        public static void SetLoadedStage(StageSO stage) {
+            currentStage = stage;
+        }
+
+        public void OnReturnToMainMenu() {
+            GameManager.LoadNewScene(GameScene.MainMenu);
         }
     }
 }
