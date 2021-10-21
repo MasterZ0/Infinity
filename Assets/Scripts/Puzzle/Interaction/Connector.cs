@@ -1,15 +1,14 @@
 using Infinity.Shared;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Infinity.Puzzle {
 
     /// <summary>
-    /// Note to developers: Please describe what this MonoBehaviour does.
+    /// Manage the connection lines and power distribution between them
     /// </summary>
-    public class Connector : MonoBehaviour {
+    public class Connector : MonoBehaviour, IEnergyConnection {
 
         [Title("Connection")]
         [SerializeField] private List<Line> lines;
@@ -18,6 +17,7 @@ namespace Infinity.Puzzle {
         private readonly List<Line> availableLines = new List<Line>();
         private bool isEnergized;
 
+        #region Initialization
         private void OnEnable() {
             PuzzleController.OnDesativePower += OnDesactivePower;
             PuzzleController.OnUpdateAnimations += OnUpdateAnimations;
@@ -26,29 +26,38 @@ namespace Infinity.Puzzle {
         private void OnDisable() {
             PuzzleController.OnDesativePower -= OnDesactivePower;
             PuzzleController.OnUpdateAnimations -= OnUpdateAnimations;
+            availableLines.Clear();
         }
 
+        /// <summary> Set available lines </summary>
         public void Init(LineDirection lineDirection) {
 
             foreach (Line line in lines) {
 
-                if (lineDirection.HasFlag(line.LineDirection)) {
+                bool hasFlag = lineDirection.HasFlag(line.LineDirection);
+                line.gameObject.SetActive(hasFlag);
+                if (hasFlag) {
                     availableLines.Add(line);
                     line.SetConnector(this);
                 }
-                else {
-                    line.gameObject.SetActive(false);
-                }
             }
         }
+        #endregion
 
+        #region Public methods
         public void Drag() {
             animator.SetBool(Animations.Highlighted, true);
+            availableLines.ForEach(l => l.ActiveLine(false));
         }
 
-        public void OnDesactivePower() {
-            isEnergized = false;
-            availableLines.ForEach(l => l.StopEnergy());
+        public void Moving() {
+            animator.SetBool(Animations.Moving, true);
+        }
+
+        public void FitIn() {
+            availableLines.ForEach(l => l.ActiveLine(true));
+            animator.SetBool(Animations.Highlighted, false);
+            animator.SetBool(Animations.Moving, false);
         }
 
         public void SendEnergy() {
@@ -59,18 +68,17 @@ namespace Infinity.Puzzle {
             isEnergized = true;
             availableLines.ForEach(l => l.SendEnergy());
         }
+        #endregion
 
-        public void FitIn() {
-            animator.SetBool(Animations.Highlighted, false);
-            animator.SetBool(Animations.Moving, false);
+        #region Events
+        private void OnDesactivePower() {
+            isEnergized = false;
+            availableLines.ForEach(l => l.StopEnergy());
         }
 
-        internal void Moving() {
-            animator.SetBool(Animations.Moving, true);
-        }
-
-        public void OnUpdateAnimations() {
+        private void OnUpdateAnimations() {
             animator.SetBool(Animations.Energized, isEnergized);
         }
+        #endregion
     }
 }

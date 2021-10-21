@@ -1,5 +1,4 @@
 using Infinity.Data;
-using Infinity.Puzzle;
 using Infinity.Shared;
 using Infinity.System;
 using Sirenix.OdinInspector;
@@ -7,8 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Infinity.Gameplay
-{
+namespace Infinity.Puzzle {
 
     /// <summary>
     /// Generate the slots and pieces
@@ -16,6 +14,10 @@ namespace Infinity.Gameplay
     public class StageGenerator : MonoBehaviour {
 
         [Title("Stage Generator")]
+        [SerializeField] private Vector2 start;
+        [SerializeField] private Vector2 spacement;
+        [SerializeField] private float max;
+        [Space]
         [SerializeField] private SpriteRenderer background;
 
         [Title("Slots")]
@@ -25,23 +27,18 @@ namespace Infinity.Gameplay
         [Title("Pieces")]
         [SerializeField] private List<Piece> pieces;
 
-        public int X => StageSO.GridX;
-        public int Y => StageSO.GridY;
-
-        public Vector2 start;
-        public Vector2 spacement;
-        public float max;
-        public void GenerateStage(StageSO stageSO) {
-            ObjectPool.ReturnAllToPool();
-            background.sprite = stageSO.Background;
-
-            // Spawn Place Holders
-            for (int x = 0; x < X; x++) {
-                for (int y = 0; y < Y; y++) {
-
-                    SpawnPlaceHolder(new Vector2(x, Y - y), stageSO.ItemsGrid[x, y]);
-                }
+        private List<Component> activeInteractables = new List<Component>();
+        #region Public methods
+        public void ClearStage() {
+            foreach (var item in activeInteractables) {
+                ObjectPool.ReturnToPool(item);
             }
+            activeInteractables.Clear();
+        }
+
+        public List<Lamp> GenerateStage(StageSO stageSO) {
+
+            background.sprite = stageSO.Background;
 
             // Spawn possible items
             Vector2 piecePosition = start;
@@ -54,29 +51,51 @@ namespace Infinity.Gameplay
                     piecePosition.y -= spacement.y;
                 }
             }
+
+            // Spawn Place Holders
+            List<Lamp> lamps = new List<Lamp>();
+
+            int lengthX = stageSO.ItemsGrid.GetLength(0);
+            int lengthY = stageSO.ItemsGrid.GetLength(1);
+            for (int x = 0; x < lengthX; x++) {
+                for (int y = 0; y < lengthY; y++) {
+
+                    Interactable item = SpawnPlaceHolder(new Vector2(x, lengthY - y), stageSO.ItemsGrid[x, y]);
+                    if (item is Lamp) {
+                        lamps.Add(item as Lamp);
+                    }
+                }
+            }
+            return lamps;
         }
-        
-        private void SpawnPlaceHolder(Vector2 position, int index) {
+        #endregion
+
+        #region Spawn
+        private Interactable SpawnPlaceHolder(Vector2 position, int index) {
             if (index == 0)
-                return;
+                return null;
 
             PuzzleType slotType = (PuzzleType)index - 1;
             Interactable prefab = interactables.Where(p => p.PuzzleType == slotType).First();
-            ObjectPool.SpawnPoolObject(prefab, position);
-
-            if (prefab is Lamp) {
-                PuzzleController.AddLamp(prefab as Lamp);
-            }
+            Interactable obj = ObjectPool.SpawnPoolObject(prefab, position);
+            activeInteractables.Add(obj);
+            return obj;
         }
 
         private void SpawnPiece(Vector2 piecePosition, PieceType pieceType, LineDirection lineDirection) {
             Interactable placeHolder = ObjectPool.SpawnPoolObject(emptySlot, piecePosition);
 
             Piece prefab = pieces.Where(p => p.PieceType == pieceType).First();
-            ObjectPool.SpawnPoolObject(prefab, piecePosition).Init(placeHolder, lineDirection);
+            Piece obj = ObjectPool.SpawnPoolObject(prefab, piecePosition);
+            obj.Init(placeHolder, lineDirection);
+            activeInteractables.Add(obj);
+            
         }
+        #endregion
 
         private void OnDrawGizmosSelected() {
+            int X = StageSO.GridX;
+            int Y = StageSO.GridY;
             Vector2 center = new Vector2(X / 2f, Y / 2f);
             Vector2 size = new Vector2(X, Y);
             Gizmos.color = Color.red;
@@ -84,14 +103,18 @@ namespace Infinity.Gameplay
         }
 
         #region Dev Tool
+#if UNITY_EDITOR
         [Title("Dev Tool")]
+        [DropdownData(nameof(Stages))]
         [SerializeField] private int stageIndex;
 
+        private static List<StageSO> Stages => GameValuesSO.GameSettings.Stages;
         [Button]
         private void TestSpawn() {
-            GenerateStage(GameValuesSO.GameSettings.Stages[stageIndex]);
+            ClearStage();
+            GenerateStage(Stages[stageIndex]);
         }
-
+#endif
         #endregion
     }
 }

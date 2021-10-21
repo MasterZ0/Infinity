@@ -3,8 +3,7 @@
     "rootNamespace": "Infinity.Player",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:2e58e14cf3f8ea848b6affa5f1b9b106",
-        "GUID:af79f6bd17c2c734c90f287a277ea264"
+        "GUID:2e58e14cf3f8ea848b6affa5f1b9b106"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

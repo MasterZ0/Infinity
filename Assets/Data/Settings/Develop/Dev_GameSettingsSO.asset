@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e09e58ce4100124788451afb2fff55d, type: 3}
   m_Name: Dev_GameSettingsSO
   m_EditorClassIdentifier: 
+  testStage: 1
   stages:
   - {fileID: 11400000, guid: 6f36c7846d699e24a9e92e5035b35910, type: 2}
   - {fileID: 11400000, guid: 05e7684a3482f7e46a5b3ed6e69c3f82, type: 2}

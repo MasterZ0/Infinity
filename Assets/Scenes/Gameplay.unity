@@ -235,6 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd16d4ff61905784c830ebe6eb42e42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {x: -1, y: -2}
+  spacement: {x: 1.25, y: 1.25}
+  max: 8.5
   background: {fileID: 588744055}
   emptySlot: {fileID: 1545178513518370311, guid: 42302e75df66497499f7d5c69ff0d1c5, type: 3}
   interactables:
@@ -249,9 +252,6 @@ MonoBehaviour:
   - {fileID: 1602542421795378523, guid: 31c81b794a90960469df71f225bfe192, type: 3}
   - {fileID: 1602542421795378523, guid: 396144c5dfb400144990e03245ae0607, type: 3}
   - {fileID: 1602542421795378523, guid: 1ad07d5b7a8aa694e83a6a12449e2846, type: 3}
-  start: {x: -1, y: -2}
-  spacement: {x: 1.25, y: 1.25}
-  max: 8.5
   stageIndex: 0
 --- !u!4 &590795917
 Transform:
@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 627697915}
   - component: {fileID: 627697914}
   - component: {fileID: 627697913}
+  - component: {fileID: 627697916}
   m_Layer: 5
   m_Name: BackBtn
   m_TagString: Untagged
@@ -350,9 +351,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1912654648}
-        m_TargetAssemblyTypeName: Infinity.Gameplay.GameController, Infinity.Gameplay
-        m_MethodName: OnReturnToMainMenu
+      - m_Target: {fileID: 627697916}
+        m_TargetAssemblyTypeName: Infinity.ApplicationManager.SceneChanger, Infinity.ApplicationManager
+        m_MethodName: OnChanceScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -400,6 +401,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627697911}
   m_CullTransparentMesh: 1
+--- !u!114 &627697916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627697911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a7a2c567d0a994eb359f9541b25d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 1
 --- !u!1 &857605417
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +730,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1912654647}
-  - component: {fileID: 1912654648}
   - component: {fileID: 1912654646}
   - component: {fileID: 1912654649}
   - component: {fileID: 1912654650}
@@ -756,20 +769,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912654648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912654645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cf2845d92475145bb5e48581ac7468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857605420}
-  stageGenerator: {fileID: 590795915}
 --- !u!114 &1912654649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,3 +794,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlayerMove: {fileID: 11400000, guid: d96d72a29cddfda4e829eb085226c731, type: 2}
+  stageGenerator: {fileID: 590795915}

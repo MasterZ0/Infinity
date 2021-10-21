@@ -107,13 +107,13 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 3
       Data: 0
@@ -155,13 +155,13 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
       Data: 0
@@ -185,34 +185,34 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 3
       Data: 0
@@ -233,34 +233,34 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
       Data: 0
@@ -281,34 +281,34 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 6
     - Name: 
       Entry: 3
       Data: 0
@@ -329,19 +329,19 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 3
       Data: 0
@@ -420,5 +420,55 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  background: 3
-  initialPieces: []
+  background: 2
+  initialPieces:
+  - pieceType: 0
+    lineDirection: 10
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 1
+    lineDirection: 9
+  - pieceType: 0
+    lineDirection: 5
+  - pieceType: 1
+    lineDirection: 10
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 1
+    lineDirection: 3
+  - pieceType: 1
+    lineDirection: 9
+  - pieceType: 1
+    lineDirection: 12
+  - pieceType: 3
+    lineDirection: 12
+  - pieceType: 1
+    lineDirection: 10
+  - pieceType: 3
+    lineDirection: 6
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 1
+    lineDirection: 5
+  - pieceType: 3
+    lineDirection: 3
+  - pieceType: 0
+    lineDirection: 10
+  - pieceType: 1
+    lineDirection: 6
+  - pieceType: 3
+    lineDirection: 3
+  - pieceType: 0
+    lineDirection: 12
+  - pieceType: 0
+    lineDirection: 5
+  - pieceType: 3
+    lineDirection: 3
+  - pieceType: 3
+    lineDirection: 5
+  - pieceType: 3
+    lineDirection: 12

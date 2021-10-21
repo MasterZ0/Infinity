@@ -3,11 +3,10 @@ using Infinity.Shared;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Infinity.Puzzle
-{
+namespace Infinity.Puzzle {
 
     /// <summary>
-    /// Note to developers: Please describe what this MonoBehaviour does.
+    /// Move and fit the piece
     /// </summary>
     public class Piece : MonoBehaviour, IDraggable {
 
@@ -19,15 +18,21 @@ namespace Infinity.Puzzle
         [SerializeField] private Connector connector;
         [SerializeField] private GameEvent onPlayerMove;
 
-        public PieceType PieceType => pieceType;
         private Vector2 startPosition;
-        private bool returning;
-        private const float Threshold = 0.02f;
         private ISlot currentSlot;
+        private bool returning;
+
+        private const float Threshold = 0.02f;
+        public PieceType PieceType => pieceType;
         private float ReturningSpeed => GameValuesSO.PuzzleSettings.PieceReturningSpeed;
 
         public void Init(Interactable empty, LineDirection lineDirection) {
+
+            // Fill slot
             currentSlot = empty as ISlot;
+            currentSlot.Drop(transform.position, pieceType);
+
+
             connector.Init(lineDirection);
         }
 
@@ -38,7 +43,6 @@ namespace Infinity.Puzzle
 
             startPosition = transform.position;
             connector.Drag();
-            currentSlot.RemovePiece();
             onPlayerMove.Invoke();
             return true;
         }
@@ -53,12 +57,14 @@ namespace Infinity.Puzzle
                 // If can't drop, return to the start position
                 bool successful = slot.Drop(position, pieceType);
                 if (successful) {
+                    currentSlot.RemovePiece();
                     currentSlot = slot;
                     FitIn(slot.Position);
                     return;
                 }
             }
 
+            connector.Moving();
             returning = true;
         }
 

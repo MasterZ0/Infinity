@@ -10,9 +10,5 @@ namespace Infinity.System {
         private void Awake() {
             ObjectPool.SetContainer(this);
         }
-
-        private void OnDestroy() {
-            ObjectPool.ReturnAllToPool();
-        }
     }
 }

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleType: 1
+  radius: 0.51
+  connectionsMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &7912351561637588433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,10 +55,6 @@ PrefabInstance:
     - target: {fileID: 4231807622233679382, guid: 6de22a8b9c82afd439472124654777c6, type: 3}
       propertyPath: m_Name
       value: Power
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231807622233679382, guid: 6de22a8b9c82afd439472124654777c6, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5997199716409944375, guid: 6de22a8b9c82afd439472124654777c6, type: 3}
       propertyPath: m_Size.y

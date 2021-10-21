@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Infinity.Shared;
+using Infinity.System;
 
 namespace Infinity.ApplicationManager {
 
@@ -52,6 +53,8 @@ namespace Infinity.ApplicationManager {
             onFinish();
         }
         private IEnumerator LoadNextScene(GameScene gameScene, Action onFinish) {
+
+            ObjectPool.ReturnAllToPool();
 
             // Unload current
             AsyncOperation loadSceneAsync = SceneManager.UnloadSceneAsync(currentScene.ToString());

@@ -1,4 +1,4 @@
-﻿using Infinity.Gameplay;
+﻿using Infinity.Puzzle;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +18,7 @@ namespace Infinity.Player {
 
         #region Properties and variables
         private readonly Controls controls;
-        private Camera Camera => GameController.MainCamera;
+        private Camera Camera => CameraController.MainCamera;
         #endregion
 
         #region Public

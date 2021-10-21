@@ -16,6 +16,11 @@ namespace Infinity.Puzzle {
         #endregion
 
         private bool filled;
+
+        private void OnDisable() {
+            filled = false;
+        }
+
         public bool Drop(Vector2 itemPosition, PieceType pieceType) {
 
             // Check type
@@ -24,7 +29,7 @@ namespace Infinity.Puzzle {
             }
 
             // Is filled or is over the minimum distance
-            if (filled && Vector2.Distance(Position, itemPosition) > MinimumDropDistance) {
+            if (filled || Vector2.Distance(Position, itemPosition) > MinimumDropDistance) {
                 return false;
             }
 

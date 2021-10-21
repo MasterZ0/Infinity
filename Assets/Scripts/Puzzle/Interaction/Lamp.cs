@@ -20,16 +20,21 @@ namespace Infinity.Puzzle {
         }
         public void OnDesactivePower() {
             isEnergized = false;
-            PuzzleController.LampTurnOff(this);
         }
 
         public void SendEnergy() {
             isEnergized = true;
-            PuzzleController.LampTurnOn(this);
         }
 
         public void OnUpdateAnimations() {
             animator.SetBool(Animations.Energized, isEnergized);
+
+            if (isEnergized) {
+                PuzzleController.LampTurnOn(this);
+            }
+            else {
+                PuzzleController.LampTurnOff(this);
+            }
         }
     }
 }

@@ -1,16 +1,22 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace TheLongSnow {
+namespace Infinity.Puzzle {
 
     /// <summary>
-    /// Control the Orthographic Size and the Camera Position
+    /// Control the Orthographic Size
     /// </summary>
-    public class CameraResolution : MonoBehaviour {
+    public class CameraController : MonoBehaviour {
+
+        [Title("Camera Controller")]
         [SerializeField] private Camera mainCamera;
         [Range(1f, 100f)]
         [SerializeField] private float width = 35f;
 
+        public static Camera MainCamera { get; private set; }
+
         void Awake() {
+            MainCamera = mainCamera;
             RescaleCamera();
         }
 
@@ -18,13 +24,9 @@ namespace TheLongSnow {
             RescaleCamera();
         }
 
-        void Update() {
-            RescaleCamera();
-        }
         private void RescaleCamera() {
             float orthoSize = width * Screen.height / Screen.width * .5f;
             mainCamera.orthographicSize = orthoSize;
-
         }
     }
 }

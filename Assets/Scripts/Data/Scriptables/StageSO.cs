@@ -16,6 +16,7 @@ namespace Infinity.Data {
         public Sprite Background => Backgrounds[background];
         public List<PieceData> InitialPieces => initialPieces;
         public int[,] ItemsGrid => itemsGrid;
+        public override string ToString() => name;  // Used to display the names in the DropdownDataAttribute
 
         public const int GridX = 8;
         public const int GridY = 16;
@@ -26,7 +27,7 @@ namespace Infinity.Data {
         [DropdownData(nameof(Backgrounds))]
         [SerializeField] private int background;
 
-        [TableList]
+        [TableList(ShowIndexLabels = true)]
         [SerializeField] private List<PieceData> initialPieces;
 
         [InfoBox("About Color:\n\n<color=grey>Black:</color> Empty\n<color=yellow>Yellow:</color> Light\n<color=cyan>Cyan:</color> Power\n<color=orange>Orange:</color> Circle\n<color=magenta>Magenta</color> Square\n<color=lime>Green:</color> Horizontal Hexagon\n<color=#FF4040>Red:</color> Vertical Hexagon")]
@@ -38,7 +39,7 @@ namespace Infinity.Data {
 
         #region Drawer methods
 #if UNITY_EDITOR
-        private static int DrawColoredEnumElement(Rect rect, int value) {
+        private  int DrawColoredEnumElement(Rect rect, int value) {
             if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition)) {
                 value++;
                 if (value > 6)
@@ -48,7 +49,6 @@ namespace Infinity.Data {
             }
 
             UnityEditor.EditorGUI.DrawRect(rect.Padding(1), GetColor(value));
-
             return value;
         }
 
@@ -61,7 +61,7 @@ namespace Infinity.Data {
                 4 => Color.magenta,
                 5 => Color.green,
                 6 => Color.red,
-                _ => Color.white,
+                _ => throw new System.NotImplementedException(),
             };
         }
 #endif

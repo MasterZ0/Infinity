@@ -1,6 +1,6 @@
 using Infinity.ApplicationManager;
 using Infinity.Data;
-using Infinity.Gameplay;
+using Infinity.Puzzle;
 using Infinity.Shared;
 using Infinity.System;
 using Sirenix.OdinInspector;
@@ -29,7 +29,7 @@ namespace Infinity.MainMenu
         }
 
         private void LoadLevel(StageSO stage) {
-            GameController.SetLoadedStage(stage);
+            PuzzleController.SetLoadedStage(stage);
             GameManager.LoadNewScene(GameScene.Gameplay);
         }
     }
