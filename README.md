@@ -54,7 +54,7 @@ On this tab you can define the game parameters, such as the speed of the pieces 
 
 - Stages
 
-Here you can create and edit the phases.
+Here you can create and edit the Stages.
 
 ![image](https://user-images.githubusercontent.com/64444068/138475699-497bb893-6122-49ff-832a-56c93e6a8b3a.png)
 
