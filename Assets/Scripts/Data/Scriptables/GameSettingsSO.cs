@@ -15,11 +15,11 @@ namespace Infinity.Data {
         public List<StageSO> Stages => stages;
         public List<Background> Backgrounds => backgrounds;
 
-        [Title("GameSettings")]
-        [ListDrawerSettings(ShowIndexLabels = true)]
+        [Title("Game Settings")]
 
         [DropdownData(nameof(stages))]
         [SerializeField] private int testStage;
+        [ListDrawerSettings(ShowIndexLabels = true)]
         [SerializeField] private List<StageSO> stages;
         [SerializeField] private List<Background> backgrounds;
     }

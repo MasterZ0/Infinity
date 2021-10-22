@@ -1,7 +1,7 @@
 namespace Infinity.Shared
 {
     public enum GameScene {
-        GameManager,
+        ApplicationManager,
         MainMenu,
         Gameplay
     }

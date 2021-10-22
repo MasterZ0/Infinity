@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 588744055}
-  emptySlot: {fileID: 1545178513518370311, guid: 42302e75df66497499f7d5c69ff0d1c5, type: 3}
+  emptySlot: {fileID: 6201109380284542579, guid: 7a5f947267e619b43a02bc5b6b70cca3, type: 3}
   interactables:
   - {fileID: 6395768127404938937, guid: 573eb5732dbdc2a44abef87541bdf57b, type: 3}
   - {fileID: -2710876757410312203, guid: 52faeee8341121441a36fd6ca1039af5, type: 3}
@@ -652,7 +652,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.666667
+  orthographic size: 12.55814
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

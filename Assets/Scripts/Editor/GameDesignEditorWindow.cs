@@ -44,7 +44,7 @@ namespace Infinity.UnityEditor {
             tree.Add($"{ApplicationName} Settings", gameDesign, GetEnvironmentIcon());
 
             // Environmments
-            tree.Add($"{ApplicationName} Settings/Main", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
+            tree.Add($"{ApplicationName} Settings/Game", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
             tree.Add($"{ApplicationName} Settings/Puzzle", GameValuesSO.PuzzleSettings, EditorIcons.Next);
 
             // Stages
