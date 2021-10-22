@@ -24,11 +24,15 @@ namespace Infinity.Data {
         public static event Action OnChangeEnvironment = delegate { };
         public static EnvironmentSettingsSO EnvironmentSettings => Datas[Environment];
         public static GameSettingsSO GameSettings => Datas[Environment].GameSettings;
+
+
         public static PuzzleSettingsSO PuzzleSettings => Datas[Environment].PuzzleSettings;
         public static EnvironmentState Environment { get; private set; }
         public static Dictionary<EnvironmentState, EnvironmentSettingsSO> Datas { get; private set; }
         
-        public void OnValidate() {
+        public void OnValidate() => Initialize();
+        
+        public void Initialize() {
             Environment = environment;
             Datas = datas;
             OnChangeEnvironment();

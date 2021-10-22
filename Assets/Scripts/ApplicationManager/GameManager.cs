@@ -1,4 +1,5 @@
-﻿using Infinity.Shared;
+﻿using Infinity.Data;
+using Infinity.Shared;
 using Infinity.Shared.ExtensionMethods;
 using Sirenix.OdinInspector;
 using System;
@@ -16,6 +17,7 @@ namespace Infinity.ApplicationManager {
         [Title("GameManager")]
         [SerializeField] private Animator transitionAnimator;
         [SerializeField] private SceneLoader sceneLoader;
+        [SerializeField] private GameValuesSO gameValues;
 
         [Title("Events")]
         [SerializeField] private GameEvent onLoadSceneFinish;
@@ -25,6 +27,7 @@ namespace Infinity.ApplicationManager {
 
         #region Initialization
         private void Awake() {
+            gameValues.Initialize();
             onLoadScene = (scene) => StartCoroutine(LoadScene(scene));
             sceneLoader.LoadApplication(OnLoadFinish);
         }

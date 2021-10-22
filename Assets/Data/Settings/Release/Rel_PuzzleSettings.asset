@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc09d5b5eccd5741b8425ac6795104f, type: 3}
-  m_Name: Sta_EnvironmentSettings
+  m_Script: {fileID: 11500000, guid: bda5fac3372302b4fa8c6ef736ee38d0, type: 3}
+  m_Name: Rel_PuzzleSettings
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: 5466ac6981a39eb4388c8ae640c8f803, type: 2}
-  puzzleSettings: {fileID: 11400000, guid: 87ed61997dce1d044bdbb60c3ed7d713, type: 2}
+  minimumDropDistance: 0.5
+  pieceReturningSpeed: 10
+  start: {x: -1, y: -1}
+  spacement: {x: 1.25, y: 1.25}
+  maxX: 8

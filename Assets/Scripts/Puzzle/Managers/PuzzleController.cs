@@ -55,20 +55,20 @@ namespace Infinity.Puzzle {
         #region Lamps
         public static void LampTurnOn(Lamp lamp) {
 
-            if (lamps.Contains(lamp)) {
-                lamps.Remove(lamp);
+            lamps.Remove(lamp);
 
-                if (lamps.Count == 0) {
-                    onPlayerWin(lamp.transform.position);
-                }
+            if (lamps.Count == 0) {
+                onPlayerWin(lamp.transform.position);
+                SoundEffects.PlaySFX(SFX.Win);
+            }
+            else {
+                SoundEffects.PlaySFX(SFX.LightOn);
             }
         }
 
         public static void LampTurnOff(Lamp lamp) {
-
-            if (!lamps.Contains(lamp)) {
-                lamps.Add(lamp);
-            }
+            lamps.Add(lamp);
+            SoundEffects.PlaySFX(SFX.LightOff);
         }
         #endregion
 
@@ -82,7 +82,6 @@ namespace Infinity.Puzzle {
         private void OnPlayerWin(Vector2 position) {
             transform.position = position;
             animator.Play(PlayerWin);
-            SoundEffects.PlaySFX(SFX.Win);
         }
 
         public void OnTransitionEnd() {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Infinity.Puzzle {
 
+    /// <summary>
+    /// Reference to the stage generator
+    /// </summary>
     public class Interactable : MonoBehaviour {
 
         [Title("Interactable")]

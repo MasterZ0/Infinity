@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc09d5b5eccd5741b8425ac6795104f, type: 3}
   m_Name: Rel_EnvironmentSettings
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: b131252f350b4a7428e377af9bab1171, type: 2}
+  gameSettings: {fileID: 11400000, guid: 27580793277e4c146b1c55ce2b7a1b45, type: 2}
+  puzzleSettings: {fileID: 11400000, guid: 51a82e2c059f87241bf3cfcefe311fca, type: 2}

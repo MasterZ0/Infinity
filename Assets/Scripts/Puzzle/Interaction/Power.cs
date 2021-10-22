@@ -23,7 +23,7 @@ namespace Infinity.Puzzle {
             if (cols != null) {
 
                 foreach (Collider2D c in cols) {
-                    c.GetComponent<IEnergyConnection>().SendEnergy();
+                    c.GetComponent<IPowerConnection>().SendPower();
                 }
             }
         }

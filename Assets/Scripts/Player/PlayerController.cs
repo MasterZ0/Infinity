@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Infinity.Player {
 
     /// <summary>
-    /// Note to developers: Please describe what this MonoBehaviour does.
+    /// Find draggable item and interact with them 
     /// </summary>
     public class PlayerController : MonoBehaviour {
 

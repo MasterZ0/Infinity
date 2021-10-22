@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e09e58ce4100124788451afb2fff55d, type: 3}
   m_Name: Rel_GameSettingsSO
   m_EditorClassIdentifier: 
-  rememberToUseTheTitle: {fileID: 0}
+  testStage: 0
+  stages:
+  - {fileID: 11400000, guid: 6f36c7846d699e24a9e92e5035b35910, type: 2}
+  - {fileID: 11400000, guid: 05e7684a3482f7e46a5b3ed6e69c3f82, type: 2}
+  - {fileID: 11400000, guid: e6aa8dab1e522834db67c18434a190b8, type: 2}
+  backgrounds:
+  - background: {fileID: 21300000, guid: 77c787f3167eeee408a64113bf78f27e, type: 3}
+  - background: {fileID: 21300000, guid: 14ac2244fd9864d4c9f8350a0e4a8450, type: 3}
+  - background: {fileID: 21300000, guid: b8209952912aa4e4c834291e0caa0da9, type: 3}
+  - background: {fileID: 21300000, guid: fc32041e90b51eb4d8bce187c027b63a, type: 3}
+  - background: {fileID: 21300000, guid: a4a10ab90a872ef4cb9e1432941e4288, type: 3}
+  - background: {fileID: 21300000, guid: 8417081212acdc44790a9cfb5e3bcf07, type: 3}
+  - background: {fileID: 21300000, guid: e6b7cf14a6e0a0d4ba45eb4b5deabcef, type: 3}

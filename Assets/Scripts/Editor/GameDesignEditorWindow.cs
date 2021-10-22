@@ -14,7 +14,7 @@ namespace Infinity.UnityEditor {
     public class GameDesignEditorWindow : OdinMenuEditorWindow {
         private ScriptableObject memoryObject;
 
-        private CreateNewAsset<StageSO> newStage;
+        private AssetCreator<StageSO> newStage;
 
         private const string ApplicationName = "Infinity";
         [MenuItem("Infinity/Game Design")]
@@ -31,35 +31,35 @@ namespace Infinity.UnityEditor {
             OdinMenuTree tree = new OdinMenuTree();
             GameValuesSO.OnChangeEnvironment += RebuildTree;
 
-            DrawEnvironment(tree);
             DrawTree(tree);
             SetMenuTreeColor(tree);
             return tree;
         }
 
-        private void DrawEnvironment(OdinMenuTree menuTree) {
-            GameValuesSO simulatorValues = AssetDatabase.LoadAssetAtPath<GameValuesSO>(ProjectPath.GameValuesPath);
+        private void DrawTree(OdinMenuTree tree) {
 
-            EditorIcon gameSettingsIcon = GameValuesSO.Environment switch {
+            // GameValues
+            GameValuesSO simulatorValues = AssetDatabase.LoadAssetAtPath<GameValuesSO>(ProjectPath.GameValuesPath);   
+            GameValuesDrawer gameDesign = new GameValuesDrawer(simulatorValues);
+            tree.Add($"{ApplicationName} Settings", gameDesign, GetEnvironmentIcon());
+
+            // Environmments
+            tree.Add($"{ApplicationName} Settings/Main", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
+            tree.Add($"{ApplicationName} Settings/Puzzle", GameValuesSO.PuzzleSettings, EditorIcons.Next);
+
+            // Stages
+            newStage = new AssetCreator<StageSO>();
+            tree.Add("Stages", newStage, EditorIcons.GridBlocks);
+            tree.AddAllAssetsAtPath("Stages", ProjectPath.Stages, typeof(StageSO));
+        }
+
+        private EditorIcon GetEnvironmentIcon() {
+            return GameValuesSO.Environment switch {
                 EnvironmentState.Develop => EditorIcons.Char2,
                 EnvironmentState.Staging => EditorIcons.Char3,
                 EnvironmentState.Release => EditorIcons.Char1,
                 _ => throw new System.ArgumentOutOfRangeException()
             };
-
-            GameDesign gameDesign = new GameDesign(simulatorValues);
-            menuTree.Add($"{ApplicationName} Settings", gameDesign, gameSettingsIcon);
-        }
-
-        private void DrawTree(OdinMenuTree tree) {
-
-            tree.Add($"{ApplicationName} Settings/Main", GameValuesSO.GameSettings, EditorIcons.SettingsCog);
-            tree.Add($"{ApplicationName} Settings/Puzzle", GameValuesSO.PuzzleSettings, EditorIcons.Next);
-
-            newStage = new CreateNewAsset<StageSO>();
-
-            tree.Add("Stages", newStage, EditorIcons.GridBlocks);
-            tree.AddAllAssetsAtPath("Stages", ProjectPath.Stages, typeof(StageSO));
         }
 
         private void SetMenuTreeColor(OdinMenuTree menuTree) {
@@ -81,6 +81,7 @@ namespace Infinity.UnityEditor {
             menuTree.Config = config;
         }
 
+        #region Toolbar
         protected override void OnBeginDrawEditors() {
             ScriptableObject asset = MenuTree?.Selection.SelectedValue as ScriptableObject;
 
@@ -114,20 +115,21 @@ namespace Infinity.UnityEditor {
 
             SirenixEditorGUI.EndHorizontalToolbar();
         }
+        #endregion
 
-        public class GameDesign {
+        public class GameValuesDrawer {
             [Title("Simulator Values"), InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Hidden), HideLabel]
             [SerializeField] private GameValuesSO SimulatorValues;
             [Title("Environment Assets"), InlineEditor(objectFieldMode: InlineEditorObjectFieldModes.Hidden), HideLabel]
             [SerializeField] private EnvironmentSettingsSO EnvironmentSettingsSO;
 
-            public GameDesign(GameValuesSO simulatorValues) {
+            public GameValuesDrawer(GameValuesSO simulatorValues) {
                 SimulatorValues = simulatorValues;
                 EnvironmentSettingsSO = GameValuesSO.EnvironmentSettings;
             }
         }
 
-        public class CreateNewAsset<T> where T : ScriptableObject {
+        public class AssetCreator<T> where T : ScriptableObject {
             [TitleGroup("File Settings"), HorizontalGroup("File Settings/Main")]
             [SerializeField] private string fileName;
 
@@ -137,7 +139,7 @@ namespace Infinity.UnityEditor {
                 AssetDatabase.SaveAssets();
             }
 
-            public CreateNewAsset() {
+            public AssetCreator() {
                 asset = CreateInstance<T>();
             }
 

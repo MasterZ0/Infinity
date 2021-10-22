@@ -17,7 +17,7 @@ namespace Infinity.Audio {
     }
 
     /// <summary>
-    /// Play Sounds
+    /// Play the sounds FX
     /// </summary>
     public class SoundEffects : MonoBehaviour {
 

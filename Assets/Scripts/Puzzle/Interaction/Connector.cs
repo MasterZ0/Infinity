@@ -9,7 +9,7 @@ namespace Infinity.Puzzle {
     /// <summary>
     /// Manage the connection lines and power distribution between them
     /// </summary>
-    public class Connector : MonoBehaviour, IEnergyConnection {
+    public class Connector : MonoBehaviour, IPowerConnection {
 
         [Title("Connection")]
         [SerializeField] private List<Line> lines;
@@ -67,13 +67,13 @@ namespace Infinity.Puzzle {
             dropConnector = drop;
         }
 
-        public void SendEnergy() {
+        public void SendPower() {
             if (isEnergized) {
                 return;
             }
 
             isEnergized = true;
-            availableLines.ForEach(l => l.SendEnergy());
+            availableLines.ForEach(l => l.SendPower());
         }
         #endregion
 

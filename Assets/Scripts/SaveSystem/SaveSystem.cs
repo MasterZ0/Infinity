@@ -11,31 +11,39 @@ namespace Infinity.SaveSystem {
 
         private const string Path = "/PlayerData.inf";
 
-        public static PlayerData Data { get; private set; }
+        private static PlayerData data;
+        public static PlayerData Data {
+            get {
+                if (data == null) {
+                    LoadGame();
+                }
+                return data;
+            }
+        }
+
         public static void SaveGame(int levelComplete) {
 
             BinaryFormatter formatter = new BinaryFormatter();
             string path = Application.persistentDataPath + Path;
             FileStream stream = new FileStream(path, FileMode.Create);
 
-            Data = new PlayerData() { completedLevels = levelComplete };
-            formatter.Serialize(stream, Data);
+            data = new PlayerData() { completedLevels = levelComplete };
+            formatter.Serialize(stream, data);
             stream.Close();
         }
 
-        public static PlayerData LoadGame() {
+        private static void LoadGame() {
 
             string path = Application.persistentDataPath + Path;
             if (!File.Exists(path)) {
                 SaveGame(0);
-                return null;
+                return;
             }
 
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            Data = formatter.Deserialize(stream) as PlayerData;
-            return Data;
+            data = formatter.Deserialize(stream) as PlayerData;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using Infinity.Audio;
-using Infinity.Shared;
+﻿using Infinity.Shared;
 using UnityEngine;
 
 namespace Infinity.Puzzle {
 
-    public class Lamp : Interactable, IEnergyConnection {
+    /// <summary>
+    /// Game objective
+    /// </summary>
+    public class Lamp : Interactable, IPowerConnection {
 
         [SerializeField] private Animator animator;
 
@@ -27,7 +29,7 @@ namespace Infinity.Puzzle {
             isEnergized = false;
         }
 
-        public void SendEnergy() {
+        public void SendPower() {
             isEnergized = true;
         }
 
@@ -38,11 +40,9 @@ namespace Infinity.Puzzle {
 
                 if (isEnergized) {
                     PuzzleController.LampTurnOn(this);
-                    SoundEffects.PlaySFX(SFX.LightOn);
                 }
                 else {
                     PuzzleController.LampTurnOff(this);
-                    SoundEffects.PlaySFX(SFX.LightOff);
                 }
             }            
         }

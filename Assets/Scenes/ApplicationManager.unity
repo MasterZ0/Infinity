@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionAnimator: {fileID: 159144186}
   sceneLoader: {fileID: 159144187}
+  gameValues: {fileID: 11400000, guid: ac3912820064d674ca51f81f9a5ae914, type: 2}
   onLoadSceneFinish: {fileID: 11400000, guid: 11a4417ec8c8af74f8fd4b5af47426a3, type: 2}
 --- !u!1 &228275223
 GameObject:

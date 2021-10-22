@@ -7,7 +7,7 @@ namespace Infinity.Puzzle {
     /// <summary>
     /// Responsible for distributing energy between the connector and other line
     /// </summary>
-    public class Line : MonoBehaviour, IEnergyConnection {
+    public class Line : MonoBehaviour, IPowerConnection {
 
         #region Variables and Properties
         [EnumPaging]
@@ -28,18 +28,18 @@ namespace Infinity.Puzzle {
         public void ActiveLine(bool enable) => boxCollider.enabled = enable;
 
         // Check all connections
-        public void SendEnergy() {
+        public void SendPower() {
             if (isEnergized) {
                 return;
             }
              
             isEnergized = true;
-            connector.SendEnergy();
+            connector.SendPower();
 
             Collider2D[] cols = Physics2D.OverlapPointAll(transform.position, connectionsMask);
             foreach (var c in cols) {
                 if (c.transform != transform) {
-                    c.GetComponent<IEnergyConnection>().SendEnergy();
+                    c.GetComponent<IPowerConnection>().SendPower();
                     break;
                 }
             }

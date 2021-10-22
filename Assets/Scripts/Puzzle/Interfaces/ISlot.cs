@@ -2,6 +2,10 @@
 using UnityEngine;
 
 namespace Infinity.Puzzle {
+
+    /// <summary>
+    /// Objects that can store items
+    /// </summary>
     public interface ISlot {
 
         public Vector2 Position { get; }

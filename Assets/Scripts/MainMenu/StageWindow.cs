@@ -24,13 +24,10 @@ namespace Infinity.MainMenu
         }
 
         private void GenerateButtonStage() {
+            Debug.Log("null game values " + GameValuesSO.GameSettings == null);
             List<StageSO> stages = GameValuesSO.GameSettings.Stages;
 
-            PlayerData playerData = SaveManager.LoadGame();
-            int completedLevel = 0;
-            if (playerData != null) {
-                completedLevel = playerData.completedLevels;
-            }
+            int completedLevel = SaveManager.Data.completedLevels;
 
             for (int i = 0; i < stages.Count; i++) {
                 ObjectPool.SpawnPoolObject(stageDisplay, parent: transform).Init(stages[i], i <= completedLevel, LoadLevel);
