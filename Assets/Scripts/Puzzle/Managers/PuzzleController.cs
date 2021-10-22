@@ -1,4 +1,6 @@
+using Infinity.Audio;
 using Infinity.Data;
+using Infinity.SaveSystem;
 using Infinity.Shared;
 using Sirenix.OdinInspector;
 using System;
@@ -15,14 +17,19 @@ namespace Infinity.Puzzle {
         [Title("PuzzleController")]
         [SerializeField] private GameEvent onPlayerMove;
         [SerializeField] private StageGenerator stageGenerator;
+        [SerializeField] private Animator animator;
 
         private static List<Lamp> lamps;
         private static StageSO currentStage;
-        private static Action onPlayerWin;
+        private static Action<Vector2> onPlayerWin;
 
         public static event Action OnDesativePower = delegate { };
         public static event Action OnActivePower = delegate { };
         public static event Action OnUpdateAnimations = delegate { };
+
+        private List<StageSO> Stages => GameValuesSO.GameSettings.Stages;
+
+        private const string PlayerWin = "PlayerWin";
 
         #region Initialization
         private void Start() {
@@ -47,10 +54,13 @@ namespace Infinity.Puzzle {
 
         #region Lamps
         public static void LampTurnOn(Lamp lamp) {
-            lamps.Remove(lamp);
 
-            if (lamps.Count == 0) {
-                onPlayerWin();
+            if (lamps.Contains(lamp)) {
+                lamps.Remove(lamp);
+
+                if (lamps.Count == 0) {
+                    onPlayerWin(lamp.transform.position);
+                }
             }
         }
 
@@ -69,9 +79,13 @@ namespace Infinity.Puzzle {
             OnUpdateAnimations();
         }
 
-        private void OnPlayerWin() {
+        private void OnPlayerWin(Vector2 position) {
+            transform.position = position;
+            animator.Play(PlayerWin);
+            SoundEffects.PlaySFX(SFX.Win);
+        }
 
-            // Call transition
+        public void OnTransitionEnd() {
             stageGenerator.ClearStage();
             SetNextStage();
             GenerateStage();
@@ -80,14 +94,16 @@ namespace Infinity.Puzzle {
 
         #region Private Methods
         private void SetNextStage() {
-            List<StageSO> stages = GameValuesSO.GameSettings.Stages;
-            int index = stages.IndexOf(currentStage) + 1;
+            int index = Stages.IndexOf(currentStage) + 1;
 
-            if (index == stages.Count) {
+            if (index == Stages.Count) {
                 index = 0;
             }
+            else if (index > SaveManager.Data.completedLevels) {
+                SaveManager.SaveGame(index);
+            }
 
-            currentStage = stages[index];
+            currentStage = Stages[index];
         }
 
         private void GenerateStage() {

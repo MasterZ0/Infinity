@@ -1,4 +1,5 @@
-﻿using Infinity.Shared;
+﻿using Infinity.Audio;
+using Infinity.Shared;
 using UnityEngine;
 
 namespace Infinity.Puzzle {
@@ -8,6 +9,7 @@ namespace Infinity.Puzzle {
         [SerializeField] private Animator animator;
 
         private bool isEnergized;
+        private bool wasEnergized;
 
         private void OnEnable() {
             PuzzleController.OnDesativePower += OnDesactivePower;
@@ -17,8 +19,11 @@ namespace Infinity.Puzzle {
         private void OnDisable() {
             PuzzleController.OnDesativePower -= OnDesactivePower;
             PuzzleController.OnUpdateAnimations -= OnUpdateAnimations;
+            wasEnergized = false;
+            isEnergized = false;
         }
         public void OnDesactivePower() {
+            wasEnergized = isEnergized;
             isEnergized = false;
         }
 
@@ -27,14 +32,19 @@ namespace Infinity.Puzzle {
         }
 
         public void OnUpdateAnimations() {
-            animator.SetBool(Animations.Energized, isEnergized);
+            if (isEnergized != wasEnergized) {
 
-            if (isEnergized) {
-                PuzzleController.LampTurnOn(this);
-            }
-            else {
-                PuzzleController.LampTurnOff(this);
-            }
+                animator.SetBool(Animations.Energized, isEnergized);
+
+                if (isEnergized) {
+                    PuzzleController.LampTurnOn(this);
+                    SoundEffects.PlaySFX(SFX.LightOn);
+                }
+                else {
+                    PuzzleController.LampTurnOff(this);
+                    SoundEffects.PlaySFX(SFX.LightOff);
+                }
+            }            
         }
     }
 }

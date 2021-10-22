@@ -1,3 +1,4 @@
+using Infinity.Audio;
 using Infinity.Data;
 using Infinity.Shared;
 using Sirenix.OdinInspector;
@@ -41,6 +42,7 @@ namespace Infinity.Puzzle {
                 return false;
             }
 
+            SoundEffects.PlaySFX(SFX.Drag);
             startPosition = transform.position;
             connector.Drag();
             onPlayerMove.Invoke();
@@ -59,11 +61,12 @@ namespace Infinity.Puzzle {
                 if (successful) {
                     currentSlot.RemovePiece();
                     currentSlot = slot;
-                    FitIn(slot.Position);
+                    FitIn(slot.Position, true);
                     return;
                 }
             }
 
+            SoundEffects.PlaySFX(SFX.Negative);
             connector.Moving();
             returning = true;
         }
@@ -72,9 +75,9 @@ namespace Infinity.Puzzle {
             transform.position = position;
         }
 
-        private void FitIn(Vector2 position) {
+        private void FitIn(Vector2 position, bool drop) {
             transform.position = position;
-            connector.FitIn();
+            connector.FitIn(drop);
             onPlayerMove.Invoke();
         }
 
@@ -83,7 +86,7 @@ namespace Infinity.Puzzle {
                 transform.position = Vector2.Lerp(transform.position, startPosition, Time.fixedDeltaTime * ReturningSpeed);
 
                 if (Vector2.Distance(transform.position, startPosition) <= Threshold) {
-                    FitIn(startPosition);
+                    FitIn(startPosition, false);
                     returning = false;
                 }
             }

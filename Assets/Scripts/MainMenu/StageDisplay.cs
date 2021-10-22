@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Infinity.MainMenu
-{
+namespace Infinity.MainMenu {
 
     /// <summary>
     /// Store the stage information and call the StageWindow when your button is pressed
@@ -21,10 +20,12 @@ namespace Infinity.MainMenu
 
         private Action<StageSO> onCaseStart;
         private StageSO stage;
-        public void Init(StageSO stage, bool locked, Action<StageSO> callback) {
+
+        /// <summary> Setup data </summary>
+        public void Init(StageSO stage, bool available, Action<StageSO> callback) {
             background.sprite = stage.Background;
-            padlock.SetActive(locked);
-            button.interactable = !locked;
+            padlock.SetActive(!available);
+            button.interactable = available;
             this.stage = stage;
             titleText.text = stage.name;
 

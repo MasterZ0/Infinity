@@ -1,12 +1,11 @@
 using Infinity.Data;
 using Infinity.Shared;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Infinity.Puzzle {
 
     /// <summary>
-    /// Note to developers: Please describe what this MonoBehaviour does.
+    /// Space to allocate item
     /// </summary>
     public class PlaceHolder : Interactable, ISlot {
 

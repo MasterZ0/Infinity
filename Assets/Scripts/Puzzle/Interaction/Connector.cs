@@ -1,3 +1,4 @@
+using Infinity.Audio;
 using Infinity.Shared;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Infinity.Puzzle {
 
         private readonly List<Line> availableLines = new List<Line>();
         private bool isEnergized;
+        private bool dropConnector;
 
         #region Initialization
         private void OnEnable() {
@@ -54,10 +56,15 @@ namespace Infinity.Puzzle {
             animator.SetBool(Animations.Moving, true);
         }
 
-        public void FitIn() {
+        /// <summary>
+        /// Set animations and active lines
+        /// </summary>
+        /// <param name="drop">Play sound effect</param>
+        public void FitIn(bool drop) {
             availableLines.ForEach(l => l.ActiveLine(true));
             animator.SetBool(Animations.Highlighted, false);
             animator.SetBool(Animations.Moving, false);
+            dropConnector = drop;
         }
 
         public void SendEnergy() {
@@ -78,6 +85,11 @@ namespace Infinity.Puzzle {
 
         private void OnUpdateAnimations() {
             animator.SetBool(Animations.Energized, isEnergized);
+
+            if (dropConnector) {
+                dropConnector = false;
+                SoundEffects.PlaySFX(isEnergized ? SFX.DropEnergy : SFX.DropWithoutEnergy);
+            }
         }
         #endregion
     }

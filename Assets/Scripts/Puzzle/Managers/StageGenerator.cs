@@ -14,10 +14,6 @@ namespace Infinity.Puzzle {
     public class StageGenerator : MonoBehaviour {
 
         [Title("Stage Generator")]
-        [SerializeField] private Vector2 start;
-        [SerializeField] private Vector2 spacement;
-        [SerializeField] private float max;
-        [Space]
         [SerializeField] private SpriteRenderer background;
 
         [Title("Slots")]
@@ -27,7 +23,12 @@ namespace Infinity.Puzzle {
         [Title("Pieces")]
         [SerializeField] private List<Piece> pieces;
 
-        private List<Component> activeInteractables = new List<Component>();
+        private readonly List<Component> activeInteractables = new List<Component>();
+
+        private Vector2 Start => GameValuesSO.PuzzleSettings.Start;
+        private Vector2 Spacement => GameValuesSO.PuzzleSettings.Spacement;
+        private float MaxX => GameValuesSO.PuzzleSettings.MaxX;
+
         #region Public methods
         public void ClearStage() {
             foreach (var item in activeInteractables) {
@@ -41,14 +42,14 @@ namespace Infinity.Puzzle {
             background.sprite = stageSO.Background;
 
             // Spawn possible items
-            Vector2 piecePosition = start;
+            Vector2 piecePosition = Start;
             foreach (PieceData pieceData in stageSO.InitialPieces) {
 
                 SpawnPiece(piecePosition, pieceData.PieceType, pieceData.LineDirection);
-                piecePosition.x += spacement.x;
-                if (piecePosition.x > max) {
-                    piecePosition.x = start.x;
-                    piecePosition.y -= spacement.y;
+                piecePosition.x += Spacement.x;
+                if (piecePosition.x > MaxX) {
+                    piecePosition.x = Start.x;
+                    piecePosition.y -= Spacement.y;
                 }
             }
 
@@ -84,22 +85,34 @@ namespace Infinity.Puzzle {
 
         private void SpawnPiece(Vector2 piecePosition, PieceType pieceType, LineDirection lineDirection) {
             Interactable placeHolder = ObjectPool.SpawnPoolObject(emptySlot, piecePosition);
+            activeInteractables.Add(placeHolder);
 
             Piece prefab = pieces.Where(p => p.PieceType == pieceType).First();
             Piece obj = ObjectPool.SpawnPoolObject(prefab, piecePosition);
             obj.Init(placeHolder, lineDirection);
             activeInteractables.Add(obj);
-            
         }
         #endregion
 
-        private void OnDrawGizmosSelected() {
+        private void OnDrawGizmos() {
+
             int X = StageSO.GridX;
             int Y = StageSO.GridY;
-            Vector2 center = new Vector2(X / 2f, Y / 2f);
+            Vector2 center = new Vector2((X / 2f) - .5f, (Y / 2f) + .5f);
             Vector2 size = new Vector2(X, Y);
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(center, size);
+
+            Vector2 piecePosition = Start;
+            for (int i = 0; i < 32; i++) {
+
+                Gizmos.DrawWireCube(piecePosition, Vector2.one);
+                piecePosition.x += Spacement.x;
+                if (piecePosition.x > MaxX) {
+                    piecePosition.x = Start.x;
+                    piecePosition.y -= Spacement.y;
+                }
+            }
         }
 
         #region Dev Tool

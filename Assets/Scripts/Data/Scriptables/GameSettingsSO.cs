@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Infinity.Data {
 
     /// <summary>
-    /// Note to developers: Please describe what this class does.
+    /// Store all available stage
     /// </summary>
     [CreateAssetMenu(fileName = "GameSettings", menuName = "Scriptable Objects/Data/Game Settings")]
     public class GameSettingsSO : ScriptableObject {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{9883e4bc-3bbe-40cd-b96a-06254fed760a}">
+		<property name="assetPath">
+			<value>Out of Phase.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>242.07673469387754</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3ebc35d5-9b49-4267-9875-9d53bdd70221}</destination>
+		</relationship>
+	</object>
+</objects>

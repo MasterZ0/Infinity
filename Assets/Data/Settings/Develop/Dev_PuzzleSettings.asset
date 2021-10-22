@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumDropDistance: 0.5
   pieceReturningSpeed: 10
+  start: {x: -1, y: -1}
+  spacement: {x: 1.25, y: 1.25}
+  maxX: 8
