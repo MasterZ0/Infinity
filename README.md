@@ -8,6 +8,8 @@ I dare you to win the third Stage 😉
 
 Download APK: https://drive.google.com/file/d/1wgdT7UfPOG4JjGa6TUqzrTTTf2T7e0Bf/view?usp=sharing
 
+Video: https://drive.google.com/file/d/1Gvp0AMpXpdvCie29ZuYYFEOZtND4j55d/view?usp=sharing
+
 Icon: 
 
 <img src="https://user-images.githubusercontent.com/64444068/138526659-6c69de3a-8821-458c-8c0b-8257148e1e46.png" width="100" height="100" />
