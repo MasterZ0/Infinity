@@ -22,5 +22,17 @@ namespace Infinity.Data {
         [ListDrawerSettings(ShowIndexLabels = true)]
         [SerializeField] private List<StageSO> stages;
         [SerializeField] private List<Background> backgrounds;
+
+        [OnInspectorInit]
+        private void OnValidate() {
+            List<StageSO> copyStages = stages;
+            for (int i = 0; i < copyStages.Count; i++) {
+                if (copyStages[i] == null) {
+                    stages.RemoveAt(i);
+                    OnValidate();
+                    return;
+                }
+            }
+        }
     }
 }
