@@ -6,7 +6,7 @@ By turning on all the lamps you will gradually unlock the other Stages. There ar
 
 I dare you to win the third Stage 😉
 
-Download APK: https://drive.google.com/file/d/1oo7qHWKAMU83TWQexSWDl7N1hNdZBtCY/view?usp=sharing
+Download APK: https://drive.google.com/file/d/1wgdT7UfPOG4JjGa6TUqzrTTTf2T7e0Bf/view?usp=sharing
 
 Icon: 
 
